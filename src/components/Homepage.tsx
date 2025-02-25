@@ -1,11 +1,13 @@
+'use client'; 
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { FaHeart } from "react-icons/fa";
 
 const products = [
   {
     id: 1,
     image: "/Image1.jpg",
-    title: "Cammera",
+    title: "Camera",
     price: "LKR 100,500.00",
     description: "description about camera",
     rating: 5,
@@ -39,7 +41,7 @@ const products = [
     image: "/Image5.jpg",
     title: "HeadPhone",
     price: "LKR 22,500.00",
-    description: "description about cheadphone",
+    description: "description about headphone",
     rating: 3,
   },
   {
@@ -51,19 +53,45 @@ const products = [
     rating: 5,
   },
 ];
+
 const Homepage = () => {
+  const [favorites, setFavorites] = useState<{ [key: number]: boolean }>({});
+
+  const toggleFavorite = (id: number) => {
+    setFavorites((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">
         Today's Featured Items
       </h2>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center"
+            className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center relative"
           >
+           
+            <div
+              onClick={() => toggleFavorite(product.id)}
+              className={`absolute top-2 right-2 p-2 rounded-full cursor-pointer  ${
+                favorites[product.id] ? " ": "bg-white "
+              }`}
+            >
+              <FaHeart 
+              strokeWidth={30}
+              stroke="black" 
+              fill={favorites[product.id] ? "red" : "white"}  
+                 className="absolute top-2 right-2 cursor-pointer"
+                size={25}
+              />
+            </div>
+
            
             <div className="w-full h-48 relative">
               <Image
@@ -75,6 +103,7 @@ const Homepage = () => {
               />
             </div>
 
+            
             <div className="mt-4 w-full flex justify-between border-b border-gray-300 pb-2">
               <h2 className="text-lg font-semibold">{product.title}</h2>
               <p className="text-black-400 font-bold">{product.price}</p>
@@ -84,7 +113,9 @@ const Homepage = () => {
 
             <div className="flex justify-start mt-2">
               {[...Array(product.rating)].map((_, i) => (
-                <span key={i} className="text-green-800  text-lg">★</span>
+                <span key={i} className="text-green-800 text-lg">
+                  ★
+                </span>
               ))}
             </div>
 
