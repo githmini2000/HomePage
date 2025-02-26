@@ -54,16 +54,99 @@ const products = [
     description: "description about JBL",
     rating: 5,
   },
+  {
+    id: 7,
+    image: "/Image7.jpg",
+    title: "Electrical Iorn",
+    price: 3500.00,
+    description: "description about electrical iorn",
+    rating: 5,
+  },
+  {
+    id: 8,
+    image: "/Image8.jpg",
+    title: "Rice Cooker",
+    price: 16500.00,
+    description: "description about rice cooker",
+    rating: 5,
+  },
+  {
+    id: 9,
+    image: "/Image9.jpg",
+    title: "Blender",
+    price: 12000.00,
+    description: "description about blender",
+    rating: 4,
+  },
+  {
+    id: 10,
+    image: "/Image10.jpg",
+    title: "Oven",
+    price: 85000.00,
+    description: "description about digital Oven",
+    rating: 5,
+  },
+  {
+    id: 11,
+    image: "/Image11.jpg",
+    title: "Fridge",
+    price: 225000.00,
+    description: "description about Fridge",
+    rating: 3,
+  },
+  {
+    id: 12,
+    image: "/Image12.jpg",
+    title: "Television",
+    price: 90000.00,
+    description: "description about television",
+    rating: 5,
+  },
+  {
+    id: 13,
+    image: "/Image13.jpg",
+    title: "Laptop",
+    price: 265000.00,
+    description: "description about laptop",
+    rating: 4,
+  },
+  {
+    id: 14,
+    image: "/Image14.jpg",
+    title: "Electrical Oven",
+    price: 225000.00,
+    description: "description about digital electrical oven",
+    rating: 5,
+  },
+  {
+    id: 15,
+    image: "/Image15.jpg",
+    title: "Gas Cooker",
+    price: 20000.00,
+    description: "description about Gas Cooker",
+    rating: 3,
+  },
+  {
+    id: 16,
+    image: "/Image6.jpg",
+    title: "Portable Speaker",
+    price: 15000.00,
+    description: "description about portable speaker",
+    rating: 5,
+  },
+
 ];
 
 const Homepage = () => {
-  const [favorites, setFavorites] = useState<{ [key: number]: boolean }>({});
+  const [visibleItemsSection1, setVisibleItemsSection1] = useState<number>(4); 
+  const [visibleItemsSection2, setVisibleItemsSection2] = useState<number>(4); 
 
-  const toggleFavorite = (id: number) => {
-    setFavorites((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const loadMoreSection1 = () => {
+    setVisibleItemsSection1(prev => prev + 4);
+  };
+
+  const loadMoreSection2 = () => {
+    setVisibleItemsSection2(prev => prev + 4);
   };
 
   return (
@@ -73,16 +156,13 @@ const Homepage = () => {
         <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Today's Featured Items</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
+          {products.slice(0, visibleItemsSection1).map((product) => (
             <div
-              key={product.id}
               className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center relative" >
-            
+              
               <FaHeart
-              onClick={() => toggleFavorite(product.id)}
-              className={`absolute top-2 right-2 cursor-pointer ${
-                favorites[product.id] ? "fill-red-500 stroke-black" : "fill-white stroke-black"
-              }`}
+              onClick={() => {}}
+              className="absolute top-2 right-2 cursor-pointer fill-white stroke-black"
               size={30}
               strokeWidth={25}
               />
@@ -119,11 +199,15 @@ const Homepage = () => {
           ))}
         </div>
 
-        <div className="text-center mt-6">
-          <button className="bg-green-900 text-white px-6 py-2 rounded-md hover:bg-green-600 transition">
-            View More
-          </button>
-        </div>
+        {visibleItemsSection1 < products.length && (
+          <div className="text-center mt-6">
+            <button
+              onClick={loadMoreSection1}
+              className="bg-green-900 text-white px-6 py-2 rounded-md hover:bg-green-600 transition"
+            >View More
+            </button>
+          </div>
+        )}
       </div>
 
       {/*section 02*/}
@@ -131,18 +215,16 @@ const Homepage = () => {
         <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Best Selling Products</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[products[0],products[2],products[3]].map((product) => (
+          {products.slice(4, visibleItemsSection2 + 4).map((product) => (
             <div
               key={product.id}
               className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center relative" >
             
               <FaHeart
-              onClick={() => toggleFavorite(product.id)}
-              className={`absolute top-2 right-2 cursor-pointer ${
-                favorites[product.id] ? "fill-red-500 stroke-black" : "fill-white stroke-black"
-              }`}
-              size={30}
-              strokeWidth={25}
+               onClick={() => {}}
+               className="absolute top-2 right-2 cursor-pointer fill-white stroke-black"
+               size={30}
+               strokeWidth={25}
               />
               
               <div className="w-full h-48 relative">
@@ -177,11 +259,16 @@ const Homepage = () => {
           ))}
         </div>
 
-        <div className="text-center mt-6">
-          <button className="bg-green-900 text-white px-6 py-2 rounded-md hover:bg-green-600 transition">
+        {visibleItemsSection2 < products.length && (
+          <div className="text-center mt-6">
+            <button
+              onClick={loadMoreSection2}
+              className="bg-green-900 text-white px-6 py-2 rounded-md hover:bg-green-600 transition"
+            >
             View More
-          </button>
-        </div>
+            </button>
+          </div>
+        )}
       </div>
       
       {/*section 03*/}
@@ -194,21 +281,18 @@ const Homepage = () => {
         <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Today's Deals</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[products[0],products[2],products[3]].map((product) => {
-           
+         {[products[0],products[2],products[3]].map((product) => {
           const discount=0.1;
           const discountPrice= (product.price* (1 - discount)).toFixed(2); 
           
           return(
-           <div
+            <div
               key={product.id}
               className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center relative" >
-            
+      
               <FaHeart
-              onClick={() => toggleFavorite(product.id)}
-              className={`absolute top-2 right-2 cursor-pointer ${
-                favorites[product.id] ? "fill-red-500 stroke-black" : "fill-white stroke-black"
-              }`}
+                  onClick={() => {}}
+                  className="absolute top-2 right-2 cursor-pointer fill-white stroke-black"
               size={30}
               strokeWidth={25}
               />
@@ -245,19 +329,11 @@ const Homepage = () => {
                 Add to Cart
               </button>
             </div>
-            );
-            } )}
-
-        </div>
-
-        <div className="text-center mt-6">
-          <button className="bg-green-900 text-white px-6 py-2 rounded-md hover:bg-green-600 transition">
-            View More
-          </button>
-        </div>
+          );
+        } )}
       </div>
-
-    </div>
+    </div>    
+  </div>
   );
 };
 
