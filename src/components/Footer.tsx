@@ -1,4 +1,5 @@
 import { IoMdPlay } from "react-icons/io";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -9,16 +10,20 @@ const Footer = () => {
             <h3 className="text-xl font-bold underline mb-4">Quick Links</h3>
             <ul>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2 " /> Home
+                <IoMdPlay className="mr-2 " />
+                <Link href="/home">Home</Link>
               </li>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2  " /> About Us
+                <IoMdPlay className="mr-2  " />
+                <Link href="/aboutUs">About Us</Link>
               </li>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2" /> Contact Us
+                <IoMdPlay className="mr-2" />
+                <Link href="/contactUs">Contact Us</Link>
               </li>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2" /> Terms & Conditions
+                <IoMdPlay className="mr-2" />
+                <Link href="/terms">Terms & Conditions</Link>
               </li>
             </ul>
           </div>
@@ -26,10 +31,12 @@ const Footer = () => {
           <div className="flex space-x-8 mt-10">
             <ul>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2" /> FAQs
+                <IoMdPlay className="mr-2" />
+                <Link href="/faqs">FAQs</Link>
               </li>
               <li className="flex items-center mb-3">
-                <IoMdPlay className="mr-2" /> Privacy Policy
+                <IoMdPlay className="mr-2" />
+                <Link href="/privacy">Privacy Policy</Link>
               </li>
             </ul>
           </div>
