@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
@@ -16,11 +15,14 @@ interface ProductCardProps {
   showDiscount?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, showDiscount = false }) => {
-    const discount = 0.1; 
-    const discountPrice = (product.price * (1 - discount)).toFixed(2);
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  showDiscount = false,
+}) => {
+  const discount = 0.1;
+  const discountPrice = (product.price * (1 - discount)).toFixed(2);
 
-    return (
+  return (
     <div className="bg-white p-4 rounded-lg shadow-lg text-start flex flex-col items-center relative">
       <FaHeart
         onClick={() => {}}
@@ -42,11 +44,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, showDiscount = false
         <div className="flex flex-col items-end">
           {showDiscount && (
             <>
-              <span className="text-gray-500 line-through text-sm">LKR {product.price.toFixed(2)}</span>
-              <span className="text-red-500 font-bold">LKR {discountPrice}</span>
+              <span className="text-gray-500 line-through text-sm">
+                LKR {product.price.toFixed(2)}
+              </span>
+              <span className="text-red-500 font-bold">
+                LKR {discountPrice}
+              </span>
             </>
           )}
-          {!showDiscount && <span className="text-black font-bold">LKR {product.price.toFixed(2)}</span>}
+          {!showDiscount && (
+            <span className="text-black font-bold">
+              LKR {product.price.toFixed(2)}
+            </span>
+          )}
         </div>
       </div>
       <p className="text-black-600 mt-2 text-left">{product.description}</p>

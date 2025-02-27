@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import ProductCard from "./ProductCard";
 import { GoArrowRight, GoArrowLeft } from "react-icons/go";
 
-
 const products = [
   {
     id: 1,
@@ -139,7 +138,7 @@ const section3Products = [
   products[0], // Camera
   products[1], // Fan
   products[2], // Kettle
-  products[3]  // Digital Watch
+  products[3], // Digital Watch
 ];
 
 const Homepage = () => {
@@ -158,7 +157,9 @@ const Homepage = () => {
     <div className="min-h-screen bg-white p-6">
       {/* Section 01 */}
       <div className="bg-gray-200 p-6 mb-6 shadow-lg rounded-lg">
-        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Today's Featured Items</h2>
+        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">
+          Today's Featured Items
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.slice(0, visibleItemsSection1).map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -178,7 +179,9 @@ const Homepage = () => {
 
       {/* Section 02 */}
       <div className="bg-gray-200 p-6 mb-6 shadow-lg rounded-lg">
-        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Best Selling Products</h2>
+        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">
+          Best Selling Products
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.slice(4, visibleItemsSection2 + 4).map((product) => (
             <ProductCard key={product.id} product={product} />
@@ -199,14 +202,26 @@ const Homepage = () => {
       {/* Section 03 */}
       <div className="relative bg-gray-200 p-6 mb-6 shadow-lg rounded-lg">
         <div className="absolute top-7 right-10 space-x-10">
-          <GoArrowLeft size={30} className="absolute rounded-full bg-gray-400 text-black cursor-pointer" />
-          <GoArrowRight size={30} className="text-black rounded-full bg-gray-400 cursor-pointer" />
+          <GoArrowLeft
+            size={30}
+            className="absolute rounded-full bg-gray-400 text-black cursor-pointer"
+          />
+          <GoArrowRight
+            size={30}
+            className="text-black rounded-full bg-gray-400 cursor-pointer"
+          />
         </div>
 
-        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">Today's Deals</h2>
+        <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">
+          Today's Deals
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {section3Products.map((product) => (
-            <ProductCard key={product.id} product={product} showDiscount={true} /> 
+            <ProductCard
+              key={product.id}
+              product={product}
+              showDiscount={true}
+            />
           ))}
         </div>
       </div>
