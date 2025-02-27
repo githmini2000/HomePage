@@ -1,11 +1,10 @@
-import Homepage from "@/components/Homepage" ;
-
+import Homepage from "@/components/Homepage";
+import Footer from "@/components/Footer";
 export default function Home() {
   return (
- <main>
-    <Homepage/>
-
-
- </main>
+    <main>
+      <Homepage />
+      <Footer />
+    </main>
   );
 }
