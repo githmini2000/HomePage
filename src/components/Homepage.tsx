@@ -9,7 +9,7 @@ const Homepage = () => {
   const [visibleItemsSection2, setVisibleItemsSection2] = useState(4);
 
   useEffect(() => {
-    fetch("/products.json")
+    fetch("http://localhost:8080/api/get-products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error loading products:", error));

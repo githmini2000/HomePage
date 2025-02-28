@@ -3,7 +3,7 @@
       "id": 1,
       "image": "/Image1.jpg",
       "title": "Camera",
-      "price": 100500.0,
+      "price": 100500.00,
       "description": "description about camera",
       "rating": 5
     },
