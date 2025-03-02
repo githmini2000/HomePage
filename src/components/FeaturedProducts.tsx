@@ -2,15 +2,16 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
-const Featuredproducts =()=>{
-    const [products, setProducts] = useState<any[]>([]);
-    const [page, setPage] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
-    const pageSize = 4;
+const Featuredproducts = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const pageSize = 4;
 
-
-const fetchProducts = () => {
-    fetch(`http://localhost:8080/api/get-products?page=${page}&size=${pageSize}`)
+  const fetchProducts = () => {
+    fetch(
+      `http://localhost:8080/api/get-products?page=${page}&size=${pageSize}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {
