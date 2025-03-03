@@ -7,7 +7,7 @@ const TodaysDeals = () => {
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/products/get-section3-products?limit=4")
+    fetch("http://localhost:8080/api/get-section3-products?limit=4")
       .then((res) => res.json())
       .then((data) => {
         console.log("Section 3 Data:", data);
