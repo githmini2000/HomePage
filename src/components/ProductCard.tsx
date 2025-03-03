@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
@@ -32,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       />
       <div className="w-full h-48 relative">
         <Image
-        src={`http://localhost:3001/images/${product.image}`}
+        src={`http://localhost:8080/assets/images/${product.image}`}
           alt={product.title}
           layout="fill"
           objectFit="contain"
