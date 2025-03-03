@@ -4,8 +4,8 @@ module.exports = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '8080',
-        pathname: '/images/**',
+        port: '3001',
+        pathname: '/images/**',  
       },
     ],
   },

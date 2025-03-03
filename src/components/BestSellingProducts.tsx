@@ -10,7 +10,7 @@ const BestSellingProducts = () => {
 
   const fetchProducts = () => {
     fetch(
-      `http://localhost:8080/api/get-best-selling-products?page=${page}&size=${pageSize}`
+      `http://localhost:3001/products/get-best-selling-products?page=${page}&size=${pageSize}`
     )
       .then((res) => res.json())
       .then((data) => {
