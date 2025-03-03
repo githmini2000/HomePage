@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       />
       <div className="w-full h-48 relative">
         <Image
-        src={`http://localhost:3001/images/${product.image}`}
+          src={product.image}
           alt={product.title}
           layout="fill"
           objectFit="contain"

@@ -55,5 +55,3 @@ const BestSellingProducts = () => {
 };
 
 export default BestSellingProducts;
-
-
