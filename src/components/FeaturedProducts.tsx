@@ -9,13 +9,13 @@ const Featuredproducts = () => {
   const pageSize = 4;
 
   const fetchProducts = () => {
-    fetch (`http://localhost:3001/products/get-products?section=featured&page=${page}&size=${pageSize}`)
+    fetch(`http://localhost:3001/items?section=featuredItems&page=${page}&size=${pageSize}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.length === 0) {
+        if (data.items.length === 0) {
           setHasMore(false);
         } else {
-          setProducts((prev) => [...prev, ...data]);
+          setProducts((prev) => [...prev, ...data.items]);
           setPage((prev) => prev + 1);
         }
       })

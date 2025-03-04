@@ -7,10 +7,10 @@ const TodaysDeals = () => {
   const [products, setProducts] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/products/get-products?section=todays-deals&page=0&size=4")
+    fetch("http://localhost:3001/items?section=todaysDeals&page=1&size=4")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Section 3 Data:", data);
+        console.log("Section 3 Data:", data.items);
         setProducts(data);
       })
       .catch((error) => console.error("API Error:", error));
