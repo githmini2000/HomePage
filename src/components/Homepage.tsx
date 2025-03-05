@@ -1,13 +1,12 @@
-"use client";
 import React from "react";
-import Featuredproducts from "./FeaturedProducts";
+import  FeaturedProducts from "./FeaturedProducts";
 import BestSellingProducts from "./BestSellingProducts";
 import TodaysDeals from "./TodaysDeals";
 
 const Homepage = () => {
   return (
     <div>
-      <Featuredproducts />
+      < FeaturedProducts/>
       <BestSellingProducts />
       <TodaysDeals />
     </div>

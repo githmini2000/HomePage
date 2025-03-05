@@ -2,32 +2,37 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 
-const Featuredproducts = () => {
+const FeaturedProducts = ({ section }: { section: string }) => {
   const [products, setProducts] = useState<any[]>([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [loading, setLoading] = useState(false);
   const pageSize = 4;
 
   const fetchProducts = () => {
-    fetch(`http://localhost:3001/items?section=featuredItems&page=${page}&size=${pageSize}`)
+    fetch(
+      `http://localhost:3001/items?section=featuredItems&page=${page}&size=${pageSize}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        if (data.items.length === 0) {
+        if (data.length === 0) {
           setHasMore(false);
         } else {
-          setProducts((prev) => [...prev, ...data.items]);
+          setProducts((prev) => [...prev, ...data]);
           setPage((prev) => prev + 1);
         }
       })
-      .catch((error) => console.error("Error loading products:", error));
+      .catch((error) =>
+        console.error("Error loading Best Selling Products:", error)
+      );
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
+
   return (
     <div>
-      {/* Section 01 - Backend Pagination */}
       <div className="bg-gray-200 p-6 mb-6 shadow-lg rounded-lg">
         <h2 className="text-3xl font-bold text-start mb-6 text-gray-800">
           Today's Featured Items
@@ -37,7 +42,7 @@ const Featuredproducts = () => {
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
-        {hasMore && (
+        {hasMore && !loading && (
           <div className="text-center mt-6">
             <button
               onClick={fetchProducts}
@@ -47,9 +52,12 @@ const Featuredproducts = () => {
             </button>
           </div>
         )}
+        {loading && (
+          <p className="text-center text-gray-600 mt-4">Loading...</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default Featuredproducts;
+export default FeaturedProducts;

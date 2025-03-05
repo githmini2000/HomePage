@@ -37,6 +37,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           layout="fill"
           objectFit="contain"
           className="rounded-md"
+          unoptimized
         />
       </div>
       <div className="mt-4 w-full flex justify-between border-b border-gray-300 pb-2">

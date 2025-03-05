@@ -4,18 +4,20 @@ import ProductCard from "./ProductCard";
 
 const BestSellingProducts = () => {
   const [products, setProducts] = useState<any[]>([]);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const pageSize = 4;
 
   const fetchProducts = () => {
-    fetch(`http://localhost:3001/items?section=bestSelling&page=${page}&size=${pageSize}`)
+    fetch(
+      `http://localhost:3001/items?section=bestSelling&page=${page}&size=${pageSize}`
+    )
       .then((res) => res.json())
       .then((data) => {
-        if (data.items.length === 0) {
+        if (data.length === 0) {
           setHasMore(false);
         } else {
-          setProducts((prev) => [...prev, ...data.items]);
+          setProducts((prev) => [...prev, ...data]);
           setPage((prev) => prev + 1);
         }
       })
