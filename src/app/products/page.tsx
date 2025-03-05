@@ -51,7 +51,7 @@ const ProductsPage = () => {
 
       setFeaturedItems(allProducts);
     } catch (error) {
-      //setError(error.message);
+      setError("Failed to load products.");
     } finally {
       setLoading(false);
     }
@@ -89,8 +89,8 @@ const ProductsPage = () => {
     e.preventDefault();
     const method = editMode ? "PUT" : "POST";
     const url = editMode
-      ? `http://localhost:3001/items/${selectedProduct.id}`
-      : "http://localhost:3001/items";
+      ? `http://localhost:3001/items/featuredItems/${selectedProduct.id}`
+      : "http://localhost:3001/items/featuredItems";
 
     const response = await fetch(url, {
       method,
@@ -109,9 +109,12 @@ const ProductsPage = () => {
     if (!window.confirm("Are you sure you want to delete this product?"))
       return;
 
-    const response = await fetch(`http://localhost:3001/items/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `http://localhost:3001/items/featuredItems/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (response.ok) {
       fetchAllProducts();
@@ -226,6 +229,17 @@ const ProductsPage = () => {
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
               />
+              <input
+                type="number"
+                name="rating"
+                placeholder="Rating (0-5)"
+                min="0"
+                max="5"
+                required
+                value={formData.rating}
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+              />
               <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
                 {editMode ? "Update Product" : "Add Product"}
               </button>
@@ -244,3 +258,98 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+
+
+/*
+import { useEffect, useState } from "react";
+import ProductList from "./productList";
+import ProductForm from "./productForm";
+
+const ProductsPage = () => {
+  const [featuredItems, setFeaturedItems] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
+  const [showForm, setShowForm] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [formData, setFormData] = useState({ title: "", price: "", description: "", image: "", rating: 0 });
+
+  const fetchAllProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("http://localhost:3001/items?section=featuredItems");
+      if (!response.ok) {
+        throw new Error("Failed to fetch products");
+      }
+      const data = await response.json();
+      setFeaturedItems(data);
+    } catch (error) {
+      setError("Error fetching products");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllProducts();
+  }, []);
+
+  // Handle Form Submission (Add or Edit)
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const method = editMode ? "PUT" : "POST";
+    const url = editMode
+      ? `http://localhost:3001/items/${selectedProduct.id}`
+      : "http://localhost:3001/items";
+
+    const response = await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      fetchAllProducts();
+      setShowForm(false);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
+    
+    const response = await fetch(`http://localhost:3001/items/${id}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      fetchAllProducts();
+    }
+  };
+
+  if (loading) return <div className="text-center text-xl font-semibold">Loading...</div>;
+  if (error) return <div className="text-center text-red-500">{error}</div>;
+
+  return (
+    <div className="container mx-auto px-4">
+      <h1 className="text-3xl font-bold text-center my-6">Products</h1>
+      <button
+        onClick={() => { setShowForm(true); setEditMode(false); }}
+        className="mb-4 px-4 py-2 bg-green-900 text-white rounded-lg"
+      >
+        + Add New Product
+      </button>
+
+      <ProductList
+        products={featuredItems}
+        onEdit={(product) => { setSelectedProduct(product); setEditMode(true); setShowForm(true); }}
+        fetchAllProducts={fetchAllProducts}
+        onDelete={handleDelete}
+      />
+
+      {showForm && <ProductForm {...{ formData, setFormData, editMode, selectedProduct, fetchAllProducts, setShowForm }} />}
+    </div>
+  );
+};
+
+export default ProductsPage;
+*/
