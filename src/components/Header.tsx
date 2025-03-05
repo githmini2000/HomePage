@@ -3,6 +3,7 @@ import { IoPersonSharp } from "react-icons/io5";
 import { PiHandbagSimple } from "react-icons/pi";
 import { CiHeart } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -11,6 +12,13 @@ const Header = () => {
         <span className="text-lg font-medium">All Categories</span>
         <SlArrowDown />
       </div>
+
+      <Link
+        href="/products"
+        className="text-xl font-medium text-black hover:text-blue-800"
+      >
+        Products
+      </Link>
 
       <div className="relative flex items-center w-full max-w-3xl ">
         <input
