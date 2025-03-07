@@ -33,7 +33,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
       <div className="flex justify-start mt-2">
         {[...Array(product.rating)].map((_, i) => (
-          <span key={i} className="text-green-800 text-lg">
+          <span
+            key={`${product.id}-star-${i}`}
+            className="text-green-800 text-lg"
+          >
             ★
           </span>
         ))}
@@ -42,13 +45,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className="flex mt-4 space-x-2">
         <button
           onClick={() => onEdit(product)}
-          className="bg-green-900 text-white px-4 py-1 rounded-sm hover:bg-green-500"
+          className="mt-4 bg-white border-4 border-green-900 text-green-900 font-bold px-4 py-1 rounded-sm hover:bg-green-500 hover:text-green transition self-start"
         >
           Edit
         </button>
         <button
           onClick={() => onDelete(product.id)}
-          className="bg-red-900 text-white px-4 py-1 rounded-sm hover:bg-red-500"
+          className="mt-4 bg-white border-4 border-red-900 text-red-900 font-bold px-4 py-1 rounded-sm hover:bg-red-500 hover:text-red transition self-start"
         >
           Delete
         </button>
