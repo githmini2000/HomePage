@@ -1,4 +1,3 @@
-////Handles adding/editing products
 "use client";
 
 import { useState } from "react";
@@ -8,6 +7,7 @@ interface ProductFormProps {
   onSubmit: (formData: any, editMode: boolean) => void;
   onCancel: () => void;
   editMode: boolean;
+  categories: any[];
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({
@@ -15,18 +15,28 @@ const ProductForm: React.FC<ProductFormProps> = ({
   onSubmit,
   onCancel,
   editMode,
+  categories,
 }) => {
   const [formData, setFormData] = useState(initialData);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData, editMode);
+    const selectedCategory = categories.find(
+      (cat) => cat.name === formData.category
+    );
+    const updatedFormData = {
+      ...formData,
+      category_id: selectedCategory ? selectedCategory.id : null,
+    };
+    onSubmit(updatedFormData, editMode);
   };
 
   return (
@@ -82,7 +92,21 @@ const ProductForm: React.FC<ProductFormProps> = ({
             onChange={handleChange}
             className="w-full border p-2 rounded"
           />
-          <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          <select
+            name="category"
+            required
+            value={formData.category}
+            onChange={handleChange}
+            className="w-full border p-2 rounded"
+          >
+            <option value="">Select Category</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.name}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+          <button className="w-full py-2 bg-green-900 text-white rounded hover:bg-green-700">
             {editMode ? "Update Product" : "Add Product"}
           </button>
         </form>
