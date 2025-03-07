@@ -1,5 +1,3 @@
-//Main component 
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -8,6 +6,7 @@ import ProductForm from "./productForm";
 
 const ProductsPage = () => {
   const [featuredItems, setFeaturedItems] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [showForm, setShowForm] = useState(false);
@@ -18,6 +17,7 @@ const ProductsPage = () => {
 
   useEffect(() => {
     fetchAllProducts();
+    fetchCategories();
   }, []);
 
   const fetchAllProducts = async () => {
@@ -47,6 +47,17 @@ const ProductsPage = () => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/category");
+      if (!response.ok) throw new Error("Failed to fetch categories");
+      const data = await response.json();
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
   const handleAddNew = () => {
     setSelectedProduct({
       title: "",
@@ -54,6 +65,7 @@ const ProductsPage = () => {
       description: "",
       image: "",
       rating: 0,
+      category: "",
     });
     setEditMode(false);
     setShowForm(true);
@@ -116,6 +128,7 @@ const ProductsPage = () => {
           onSubmit={handleSubmit}
           onCancel={() => setShowForm(false)}
           editMode={editMode}
+          categories={categories}
         />
       )}
     </div>
