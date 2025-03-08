@@ -34,7 +34,13 @@ const ProductsPage = () => {
         const data = await response.json();
         if (data.length === 0) hasMoreData = false;
         else {
-          allProducts = [...allProducts, ...data];
+          const formattedProducts = data.map((product: any) => ({
+            ...product,
+            category: product.category
+              ? product.category
+              : { id: "", name: "" },
+          }));
+          allProducts = [...allProducts, ...formattedProducts];
           page++;
         }
       }
@@ -88,19 +94,32 @@ const ProductsPage = () => {
   };
 
   const handleSubmit = async (formData: any, editMode: boolean) => {
+    if (!formData.category || !formData.category.id) {
+      alert("Invalid category selected.");
+      return;
+    }
+
     const method = editMode ? "PUT" : "POST";
     const url = editMode
       ? `http://localhost:3001/items/featuredItems/${selectedProduct.id}`
       : "http://localhost:3001/items/featuredItems";
 
+    const requestBody = {
+      ...formData,
+      category_id: formData.category.id,
+    };
+
     const response = await fetch(url, {
       method,
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(requestBody),
     });
+
     if (response.ok) {
       fetchAllProducts();
       setShowForm(false);
+    } else {
+      console.error("Failed to submit form");
     }
   };
 
