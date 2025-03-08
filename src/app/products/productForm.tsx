@@ -94,14 +94,18 @@ const ProductForm: React.FC<ProductFormProps> = ({
           />
           <select
             name="category"
-            required
-            value={formData.category}
-            onChange={handleChange}
+            value={formData.category?.id || ""}
+            onChange={(e) => {
+              const selectedCategory = categories.find(
+                (cat) => cat.id === Number(e.target.value)
+              );
+              setFormData({ ...formData, category: selectedCategory || null });
+            }}
             className="w-full border p-2 rounded"
           >
             <option value="">Select Category</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={cat.name}>
+              <option key={cat.id} value={cat.id}>
                 {cat.name}
               </option>
             ))}
