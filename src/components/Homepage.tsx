@@ -8,8 +8,8 @@ const Homepage = () => {
   return (
     <div>
       <FeaturedProducts />
-      <BestSellingProducts />
-      <TodaysDeals />
+      {/*<BestSellingProducts />*}
+      {/*<TodaysDeals />*/}
     </div>
   );
 };
