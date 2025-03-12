@@ -6,11 +6,11 @@ import { CiHeart } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useCategory } from "@/context/CategoryContext";
+import { useCategory } from "../context/CategoryContext";
 
 const Header = () => {
   const { selectedCategory, setSelectedCategory } = useCategory();
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<any[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:3001/category")

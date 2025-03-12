@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import { useCategory } from "@/context/CategoryContext";
+import { useCategory } from "../context/CategoryContext";
 
 const FeaturedProducts = ({ section }: { section: string }) => {
   const [products, setProducts] = useState<any[]>([]);
